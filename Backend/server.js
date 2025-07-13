@@ -30,12 +30,21 @@ app.post('/task',authmiddleware,async(req,res)=>{
 
 app.get('/task', authmiddleware, async (req, res) => {
   try {
-    const tasks = await Task.find({ user: req.user.id });
+    const { status, priority } = req.query;
+
+    // Always filter by logged-in user
+    let filter = { user: req.user.id };
+
+    if (status) filter.status = status;
+    if (priority) filter.priority = priority;
+
+    const tasks = await Task.find(filter);
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ message: "Error fetching tasks", error: err.message });
   }
 });
+
 
 
 app.post('/register',async(req,res)=>{

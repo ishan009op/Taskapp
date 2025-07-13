@@ -20,7 +20,7 @@ const Card = () => {
         setTask(res.data)
       } catch (err) {
         console.error('Fetch failed', err)
-        navigate('/') // redirect if not found or error
+        navigate('/')
       }
     }
 
@@ -64,14 +64,14 @@ const Card = () => {
   }
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100 px-4 py-10">
-      <div className="bg-white shadow-xl rounded-xl p-6 w-full max-w-xl">
-        <h2 className="text-2xl font-bold text-blue-700 mb-4">{task.title}</h2>
+    <div className="min-h-screen flex justify-center items-center bg-[#9929EA] px-4 py-10">
+      <div className="bg-white shadow-2xl rounded-xl p-8 w-full max-w-xl">
+        <h2 className="text-3xl font-bold text-[#CC66DA] mb-6">{task.title}</h2>
 
-        <div className="space-y-2 text-gray-700">
+        <div className="space-y-4 text-gray-700 text-lg">
           <p>
             <span className="font-semibold">Priority:</span>{' '}
-            <span className="capitalize text-blue-600">{task.priority}</span>
+            <span className="capitalize text-[#B94BCF]">{task.priority}</span>
           </p>
 
           <p>
@@ -90,7 +90,7 @@ const Card = () => {
                 task.status === 'completed'
                   ? 'text-green-600'
                   : task.status === 'in process'
-                  ? 'text-yellow-600'
+                  ? 'text-yellow-500'
                   : 'text-red-600'
               }`}
             >
@@ -99,22 +99,22 @@ const Card = () => {
           </p>
         </div>
 
-        <div className="mt-6 flex gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row gap-4">
           {task.status !== 'completed' && (
             <button
               onClick={completed}
               disabled={isButtonDisabled}
-              className="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition disabled:opacity-50"
+              className="flex-1 bg-[#FAEB92] text-black font-semibold py-2 rounded-lg hover:bg-yellow-300 transition disabled:opacity-50"
             >
-              Mark as Completed ✅
+              Mark as Completed
             </button>
           )}
 
           <button
             onClick={handleDelete}
-            className="flex-1 bg-red-500 text-white py-2 rounded hover:bg-red-600 transition"
+            className="flex-1 bg-red-500 text-white font-semibold py-2 rounded-lg hover:bg-red-600 transition"
           >
-            Delete 🗑️
+            Delete Task
           </button>
         </div>
       </div>

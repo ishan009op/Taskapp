@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ const AddTask = () => {
   const [Priority, setPriority] = useState('');
   const [date, setDate] = useState('');
   const token = localStorage.getItem('tasktoken');
- const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const addtask = async (e) => {
     e.preventDefault();
@@ -20,6 +20,7 @@ const AddTask = () => {
       );
 
       alert('Task added successfully');
+      navigate('/');
       setTitle('');
       setPriority('');
       setDate('');
@@ -27,21 +28,22 @@ const AddTask = () => {
       console.error('Error adding task:', error.response?.data || error.message);
     }
   };
-useEffect(() => {
-    const token = localStorage.getItem('tasktoken')
+
+  useEffect(() => {
+    const token = localStorage.getItem('tasktoken');
     if (!token) {
-      navigate('/login') // 🚫 redirect non-users
+      navigate('/login');
     }
-  }, [navigate])
+  }, [navigate]);
+
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
-      <div className="max-w-xl mx-auto bg-white shadow-md rounded-xl p-6">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+    <div className="min-h-screen bg-[#9929EA] py-10 px-4">
+      <div className="max-w-xl mx-auto bg-white shadow-xl rounded-xl p-8">
+        <h2 className="text-3xl font-bold text-center text-[#CC66DA] mb-6">
           Create New Task 📝
         </h2>
 
-        <form onSubmit={addtask} className="space-y-5">
-
+        <form onSubmit={addtask} className="space-y-6">
           {/* Task Title */}
           <div>
             <label htmlFor="title" className="block text-gray-700 font-medium mb-1">Task Title</label>
@@ -52,7 +54,7 @@ useEffect(() => {
               onChange={(e) => setTitle(e.target.value)}
               required
               placeholder="Enter your task title"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CC66DA]"
             />
           </div>
 
@@ -68,7 +70,7 @@ useEffect(() => {
                     value={level}
                     checked={Priority === level}
                     onChange={(e) => setPriority(e.target.value)}
-                    className="accent-blue-600"
+                    className="accent-[#CC66DA]"
                   />
                   {level}
                 </label>
@@ -85,14 +87,14 @@ useEffect(() => {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CC66DA]"
             />
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+            className="w-full bg-[#FAEB92] text-black font-bold py-2 rounded-lg hover:bg-yellow-300 transition"
           >
             Add Task
           </button>
